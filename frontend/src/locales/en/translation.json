@@ -1,0 +1,77 @@
+{
+  "header": {
+    "company_name": "Kilter club Almaty",
+    "sub_logo_button": "climbing gym",
+    "link_home": "Home",
+    "link_visit": "Visit"
+  },
+  "home": {
+    "variant": "Variant",
+    "variant_content": "12x12' (365x365 cm) original layout",
+    "holds": "Holds",
+    "holds_content": "323 hand holds + 153 foot holds",
+    "leds": "LEDs",
+    "leds_content": "Highlight your way to the top is an outstanding feature",
+    "adjustable": "Adjustable",
+    "adjustable_content": "You may change wall angle from 0 to 70 degree",
+    "target_audience": "Target audience",
+    "target_audience_content": "Entertaining for experienced climbers and beginners as well",
+    "grades": "Grades",
+    "grades_content": "5a-8c / V0-V15",
+    "olympic": "Olympic",
+    "olympic_content": "Rock climbing is an olympic sport since 2020 in Tokyo. Bouldering is one of the three disciplines.",
+    "stay_fit": "Stay fit",
+    "stay_fit_content": "Climbing is an exellent activity to stay in shape and burn fat from each part of your body.",
+    "be_stronger": "Be stronger",
+    "be_stronger_content": "With regular trainings you will notice how your muscles strength grows.",
+    "problem_solving": "Problem solving",
+    "problem_solving_content": "Besides physical abilities you also should use your brain when you solve some unusual boulder problems.",
+    "feel_the_progress": "Feel the progress",
+    "feel_the_progress_content": "Unlike other sport climbing gives you an apparent progressing experience with it's grade system. The stronger and experienced you get the higher grade you may climb.",
+    "fun": "Fun",
+    "fun_content": "It's much more fun when you appeal to some problem with your friends.",
+
+    "header1": "First Kilterboard  in Kazakhstan!",
+    "subheader": "Small climbing gym with primary focus on Kilterboard trainings",
+    "book_now_link": "Book my training now",
+
+    "why_climbing_header": "Why climbing?",
+    "what_is_kilter_header": "What is Kilterboard?",
+    "our_setup_header": "Our setup",
+    "map_contacts_header": "Map / Contacts",
+    "our_address": "Our address",
+    "address_line": "Test street, 123, 1th floor, office 2",
+    "contact_phone": "Contact phone",
+    "point_title": "Kilter club Almaty is here"
+  },
+  "footer": {
+    "home": "Home",
+    "visit": "Visit",
+    "terms": "Terms & conditions",
+    "faq": "FAQ"
+  },
+
+  "signin": {
+    "title": "Sign in",
+    "email_label": "Email Address",
+    "pass_label": "Password",
+    "remember": "Remember me on this device",
+    "button": "Sign in",
+    "password_reset": "Forgot password?",
+    "signup": "Don't have an account? Sign Up"
+  },
+
+  "signup": {
+    "steps": ["Email", "Confirm email", "Password & name", "Phone", "Finish"],
+    "title": "Create new account",
+    "please_wait": "Please wait...",
+    "fill_all_to_proceed": "Please fill all the fields above to proceed",
+    "next": "Next",
+    "finish": "Finish",
+    "back": "Back",
+    "skip": "Skip",
+    "email_label": "Email Address",
+    "wrong_code": "Wrong confirmation code. Probably it's already outdated. Please return back and send another confirmation email.",
+    "password_mistmatch": "Passwords should match"
+  }
+}

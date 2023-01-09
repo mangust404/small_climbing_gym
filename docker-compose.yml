@@ -1,25 +1,47 @@
 services:
   frontend:
-    image: node:14-alpine3.16
+    build: docker/frontend
     ports:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
     working_dir: /app
-    command: npm start
+    environment:
+      - SITENAME
+    command: sh -c "npm install && npm start"
 
   backend:
-    image: node:14-alpine3.16
+    build: docker/backend
     ports:
       - "3001:3000"
     volumes:
       - ./backend:/app
+      - backend_node_modules:/app/node_modules
+      - ./.env:/app/.env
     working_dir: /app
-    command: node app.js
+    environment:
+      - MONGODB_URI=mongodb://${MONGODB_USER}:${MONGODB_PWD}@db:27017/${MONGODB_DB}
+      - MONGODB_URI_TEST=mongodb://${MONGODB_USER_TEST}:${MONGODB_PWD_TEST}@db:27017/${MONGODB_DB_TEST}
+      - SITENAME
+      - BACKEND_HOST
+      - BACKEND_PORT
+      - MAIL_SMTP_HOST
+      - MAIL_SMTP_PORT
+      - MAIL_SMTP_USER
+      - MAIL_SMTP_PASS
+      - MAIL_SMTP_FROM
+    command: sh -c "npm install && npx nodemon app.js"
 
   db:
     build: docker/db
     environment:
+      - MONGODB_USER
+      - MONGODB_PWD
+      - MONGODB_DB
+      - MONGODB_DB_TEST
+      - MONGODB_USER_TEST
+      - MONGODB_PWD_TEST
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
     ports:
@@ -29,3 +51,5 @@ services:
 
 volumes:
   mongodb-data:
+  frontend_node_modules:
+  backend_node_modules:

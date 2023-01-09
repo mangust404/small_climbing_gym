@@ -1,12 +1,34 @@
+require('dotenv').config()
+const cors = require('cors')
 const express = require('express')
-const app = express()
-const HOST = '0.0.0.0'
-const PORT = 3000
+const glob = require('glob')
+
+const app = express();
+const HOST = process.env.BACKEND_HOST || '0.0.0.0';
+const PORT = process.env.BACKEND_PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Hello world!')
+  res.send('Nothing is here, sorry')
+});
+
+// Attach path for every file in api folder
+glob("./api/**/*.js", function (er, files) {
+  files.forEach(function(file) {
+    const item = file.substr(1).split('.js')[0];
+    const [path, method] = item.split('.');
+
+    console.log('using', method, path);
+    app[method](path, (req, res) => {
+      console.log('[invoke ' + method + ' ' + path + ']', req.body);
+      return require(file)(req, res);
+    });
+  })
 })
 
 app.listen(PORT, HOST, () => {
   console.log(`Listening on ${HOST}:${PORT}`)
-})
+});

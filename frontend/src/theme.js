@@ -5,6 +5,7 @@ import { LinkBehavior } from './helpers/LinkBehavior';
 const theme = createTheme({
   palette: {
     mode: 'dark',
+    muted: '#999'
     /*primary: {
       main: '#556cd6',
     },

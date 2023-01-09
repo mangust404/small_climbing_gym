@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Paper } from '@mui/material';
 //import i18next from '../i18n';
 
-export default function Faq() {
+export default function SignOut() {
   return (
     <Paper
       sx={{
@@ -10,7 +10,7 @@ export default function Faq() {
         mb: 4
       }}
     >
-      Todo FAQ
+      Todo SignOut
     </Paper>
   );
 }

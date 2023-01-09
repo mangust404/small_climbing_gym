@@ -12,7 +12,7 @@ export default function Footer(props) {
           to="/"
           sx={{ my: 1, mx: 1.5 }}
         >
-          {i18next.t('Home')}
+          {i18next.t('footer.home')}
         </Link>
         <Link
           variant="button"
@@ -20,7 +20,7 @@ export default function Footer(props) {
           to="/visit"
           sx={{ my: 1, mx: 1.5 }}
         >
-          {i18next.t('Visit')}
+          {i18next.t('footer.visit')}
         </Link>
         <Link
           variant="button"
@@ -28,7 +28,7 @@ export default function Footer(props) {
           to="/terms"
           sx={{ my: 1, mx: 1.5 }}
         >
-          {i18next.t('Terms & conditions')}
+          {i18next.t('footer.terms')}
         </Link>
         <Link
           variant="button"
@@ -36,7 +36,7 @@ export default function Footer(props) {
           to="/faq"
           sx={{ my: 1, mx: 1.5 }}
         >
-          {i18next.t('FAQ')}
+          {i18next.t('footer.faq')}
         </Link>
 
         <Typography sx={{ml: 4}}>© Kilter club Almaty {(new Date()).getFullYear()}</Typography>

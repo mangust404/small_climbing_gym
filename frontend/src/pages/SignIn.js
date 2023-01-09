@@ -4,6 +4,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import KeyIcon from '@mui/icons-material/Key';
 import theme from '../theme.js';
+import i18next from '../i18n';
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -29,7 +30,7 @@ export default function SignIn() {
           <LockOutlinedIcon htmlColor={theme.palette.primary.light} />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {i18next.t('signin.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -45,7 +46,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={i18next.t('signin.email_label')}
             name="email"
             autoComplete="email"
             autoFocus
@@ -63,14 +64,14 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={i18next.t('signin.pass_label')}
             type="password"
             id="password"
             autoComplete="current-password"
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" defaultChecked />}
-            label="Remember me"
+            label={i18next.t('signin.remember')}
           />
           <Button
             type="submit"
@@ -78,17 +79,17 @@ export default function SignIn() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            {i18next.t('signin.button')}
           </Button>
           <Grid container>
             <Grid item xs>
               <Link to="/password-reset" variant="body2">
-                Forgot password?
+                {i18next.t('signin.password_reset')}
               </Link>
             </Grid>
             <Grid item>
               <Link to="/sign-up" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {i18next.t('signin.signup')}
               </Link>
             </Grid>
           </Grid>

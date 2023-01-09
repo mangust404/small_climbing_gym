@@ -1,76 +1,76 @@
 import * as React from 'react';
 import { Typography, Box, Paper, Grid, Link, Avatar, Chip   } from '@mui/material';
 import i18next from '../i18n';
-import YoutubeEmbed from "../components/YoutubeEmbed";
-import HomeCard from "../components/HomeCard";
-import { SlimIcon, FlexIcon } from "../helpers/Icons";
-import { AspectRatio, Margin, Lightbulb, Adjust, Terrain, EmojiEvents, Psychology, KeyboardDoubleArrowUp, Celebration, Info as InfoIcon } from "@mui/icons-material";
+import YoutubeEmbed from '../components/YoutubeEmbed';
+import HomeCard from '../components/HomeCard';
+import { SlimIcon, FlexIcon } from '../helpers/Icons';
+import { AspectRatio, Margin, Lightbulb, Adjust, Terrain, EmojiEvents, Psychology, KeyboardDoubleArrowUp, Celebration, Info as InfoIcon } from '@mui/icons-material';
 import theme from '../theme.js';
 import Lazy2gisMap from '../components/Lazy2gisMap';
 
 const features = [
   {
-    title: i18next.t('Variant'),
+    title: i18next.t('home.variant'),
     icon: <AspectRatio htmlColor={theme.palette.secondary.light} />,
-    content: i18next.t('12x12\' (365x365 cm) original layout')
+    content: i18next.t('home.variant_content')
   },
   {
-    title: i18next.t('Holds'),
+    title: i18next.t('home.holds'),
     icon: <Margin htmlColor={theme.palette.secondary.light} />,
-    content: i18next.t('323 hand holds + 153 foot holds')
+    content: i18next.t('home.holds_content')
   },
   {
-    title: i18next.t('LEDs'),
+    title: i18next.t('home.leds'),
     icon: <Lightbulb htmlColor={theme.palette.secondary.light} />,
-    content: i18next.t('Highlight your way to the top is an outstanding feature')
+    content: i18next.t('home.leds_content')
   },
   {
-    title: i18next.t('Adjustable'),
+    title: i18next.t('home.adjustable'),
     icon: <svg height="800" width="800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.999 511.999"><path d="M495.304 425.739H255.185c-3.583-51.997-23.784-100.693-58.116-140.068L401.37 81.369c6.521-6.516 6.521-17.092 0-23.609-6.521-6.521-17.087-6.521-23.609 0L162.228 273.293 4.891 430.631a16.694 16.694 0 0 0 11.803 28.499H495.303c9.217 0 16.696-7.473 16.696-16.696 0-9.222-7.478-16.695-16.695-16.695z"/></svg>,
-    content: i18next.t('You may change wall angle from 0 to 70 degree')
+    content: i18next.t('home.adjustable_content')
   },
   {
-    title: i18next.t('Target audience'),
+    title: i18next.t('home.target_audience'),
     icon: <Adjust htmlColor={theme.palette.secondary.light} />,
-    content: i18next.t('Entertaining for experienced climbers and beginners as well')
+    content: i18next.t('home.target_audience_content')
   },
   {
-    title: i18next.t('Grades'),
+    title: i18next.t('home.grades'),
     icon: <Terrain htmlColor={theme.palette.secondary.light} />,
-    content: i18next.t('5a-8c / V0-V15')
+    content: i18next.t('home.grades_content')
   }
 ];
 
 const climbing = [
   {
-    title: i18next.t('Olympic'),
+    title: i18next.t('home.olympic'),
     icon: <EmojiEvents htmlColor={theme.palette.primary.light} />,
-    content: i18next.t('Rock climbing is an olympic sport since 2020 in Tokyo. Bouldering is one of the three disciplines.')
+    content: i18next.t('home.olympic_content')
   },
   {
-    title: i18next.t('Stay fit'),
+    title: i18next.t('home.stay_fit'),
     icon: <SlimIcon />,
-    content: i18next.t('Climbing is an exellent activity to stay in shape and burn fat from each part of your body.')
+    content: i18next.t('home.stay_fit_content')
   },
   {
-    title: i18next.t('Be stronger'),
+    title: i18next.t('home.be_stronger'),
     icon: <FlexIcon />,
-    content: i18next.t('With regular trainings you will notice how your muscles strength grows.')
+    content: i18next.t('home.be_stronger_content')
   },
   {
-    title: i18next.t('Problem solving'),
+    title: i18next.t('home.problem_solving'),
     icon: <Psychology htmlColor={theme.palette.primary.light} viewBox="0 0 20 20" sx={{transform: 'scale(130%) translateX(-10%) translateY(-12%)'}} />,
-    content: i18next.t('Besides physical abilities you also should use your brain when you solve some unusual boulder problems.')
+    content: i18next.t('home.problem_solving_content')
   },
   {
-    title: i18next.t('Feel the progress'),
+    title: i18next.t('home.feel_the_progress'),
     icon: <KeyboardDoubleArrowUp htmlColor={theme.palette.primary.light} />,
-    content: i18next.t('Unlike other sport climbing gives you an apparent progressing experience with it\'s grade system. The stronger and experienced you get the higher grade you may climb.')
+    content: i18next.t('home.feel_the_progress_content')
   },
   {
-    title: i18next.t('Fun'),
+    title: i18next.t('home.fun'),
     icon: <Celebration htmlColor={theme.palette.primary.light} />,
-    content: i18next.t('It\'s much more fun when you appeal to some problem with your friends.')
+    content: i18next.t('home.fun_content')
   }
 ]
 
@@ -118,7 +118,7 @@ export default function Home() {
                 sx={{backgroundColor: 'rgba(0,0,0,0.4)', display: 'inline-block', px: 1}}
                 gutterBottom
               >
-                {i18next.t('First Kilterboard  in Kazakhstan!')}
+                {i18next.t('home.header1')}
               </Typography>
               <Typography
                 variant="h5"
@@ -126,7 +126,7 @@ export default function Home() {
                 sx={{backgroundColor: 'rgba(0,0,0,0.4)', px: 1}}
                 paragraph
               >
-                {i18next.t('Small climbing gym with primary focus on Kilterboard trainings.')}
+                {i18next.t('home.subheader')}
               </Typography>
               <Link
                 variant="subtitle1"
@@ -134,15 +134,15 @@ export default function Home() {
                 sx={{pl: 1}}
                 to="/visit"
               >
-                {i18next.t('Book my training now')}
+                {i18next.t('home.book_now_link')}
               </Link>
             </Box>
           </Grid>
         </Grid>
       </Paper>
 
-      <Typography variant="h2" sx={{textAlign: "center", mt: 6, mb: 2, color: 'primary.main', textShadow: `0 0 6px ${theme.palette.primary.main}`}}>
-        {i18next.t('Why climbing?')}
+      <Typography variant="h2" sx={{textAlign: 'center', mt: 6, mb: 2, color: 'primary.main', textShadow: `0 0 6px ${theme.palette.primary.main}`}}>
+        {i18next.t('home.why_climbing_header')}
       </Typography>
 
       <Box
@@ -155,8 +155,8 @@ export default function Home() {
         {climbing.map(function(card, i) { return  <HomeCard key={i} color={theme.palette.primary.dark} {...card} /> })}
       </Box>
 
-      <Typography variant="h2" sx={{textAlign: "center", mt: 6, mb: 2, color: 'warning.main', textShadow: `0 0 6px ${theme.palette.warning.main}`}}>
-        {i18next.t('What is Kilterboard?')}
+      <Typography variant="h2" sx={{textAlign: 'center', mt: 6, mb: 2, color: 'warning.main', textShadow: `0 0 6px ${theme.palette.warning.main}`}}>
+        {i18next.t('home.what_is_kilter_header')}
       </Typography>
 
       <Grid container sx={{ justifyContent: 'center' }}>
@@ -183,8 +183,8 @@ export default function Home() {
         </Grid>
       </Grid>
 
-      <Typography variant="h2" sx={{textAlign: "center", mt: 6, mb: 2, color: 'secondary.main', textShadow: `0 0 6px ${theme.palette.secondary.main}`}}>
-        {i18next.t('Our setup')}
+      <Typography variant="h2" sx={{textAlign: 'center', mt: 6, mb: 2, color: 'secondary.main', textShadow: `0 0 6px ${theme.palette.secondary.main}`}}>
+        {i18next.t('home.our_setup_header')}
       </Typography>
 
       <Box
@@ -197,20 +197,20 @@ export default function Home() {
         {features.map(function(card, i) { return  <HomeCard key={i} color={theme.palette.secondary.dark} {...card} /> })}
       </Box>
 
-      <Typography variant="h2" sx={{textAlign: "center", mt: 6, mb: 2, color: 'success.main', textShadow: `0 0 6px ${theme.palette.success.main}`}}>
-        {i18next.t('Map / Contacts')}
+      <Typography variant="h2" sx={{textAlign: 'center', mt: 6, mb: 2, color: 'success.main', textShadow: `0 0 6px ${theme.palette.success.main}`}}>
+        {i18next.t('home.map_contacts_header')}
       </Typography>
 
       <Grid container sx={{justifyContent: 'center'}}>
         <Grid item md={3} sx={{textAlign: 'center'}}>
           <Typography variant="h6">
-            {i18next.t('Our address')}
+            {i18next.t('home.our_address')}
           </Typography>
           <Typography>
-            {i18next.t('Test street, 123, 1th floor, office 2')}
+            {i18next.t('home.address_line')}
           </Typography>
           <Typography variant="h6" sx={{mt: 4}}>
-            {i18next.t('Contact phone')}
+            {i18next.t('home.contact_phone')}
           </Typography>
           <Chip
             label="+7 (707) 1234567"
@@ -224,7 +224,7 @@ export default function Home() {
             sx={{ height: 400, display: 'block' }}
             center={[43.238214, 76.94546]}
             zoom={16}
-            balloon_text={i18next.t('Kilter club Almaty is here')}
+            balloon_text={i18next.t('home.point_title')}
           />
         </Grid>
       </Grid>

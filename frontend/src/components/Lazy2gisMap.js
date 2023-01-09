@@ -1,59 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {  useRef } from 'react';
 import { Box } from '@mui/material';
+import { useOnScrollToElement } from '../helpers/useOnScrollToElement';
 
 export default function Lazy2gisMap(props) {
   const mapRef = useRef(null);
-  const [mapState, setMapState] = useState({scrolled: false, mapObject: null});
+  let mapObject = null;
 
-  useEffect(() => {
-    function elementInViewPort() {
-      // getBoundingClientRect => returns the size of the given element and the position of it in relation to the view port
-      const clientRect = mapRef.current.getBoundingClientRect();
+  const createMap = () => {
+    const dg = require('2gis-maps');
+    mapObject = dg.map(mapRef.current, {
+      'center': props.center,
+      'zoom': props.zoom
+    });
+    dg.marker(props.center).addTo(mapObject).bindPopup(props.balloon_text);
+  }
 
-      return (
-        clientRect.top >= 0 &&
-        clientRect.left >= 0 &&
-        clientRect.bottom - 100 <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        clientRect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
+  const removeMap = () => {
+    if (mapObject) mapObject.remove();
+  }
 
-    function checkViewPortCallback() {
-      if (!mapState.mapObject && elementInViewPort()) {
-        setMapState((prevState) => {
-          return {...prevState, scrolled: true}
-        });
-      }
-    }
-
-    window.onscroll = window.addEventListener("scroll", checkViewPortCallback);
-
-    return () => {
-      window.removeEventListener("scroll", checkViewPortCallback);
-    };
-  }, [mapState.mapObject]);
-
-  useEffect(() => {
-    if (mapState.scrolled && !mapState.mapObject) {
-      const dg = require('2gis-maps');
-      const mapObject = dg.map(mapRef.current, {
-        'center': props.center,
-        'zoom': props.zoom
-      });
-      dg.marker(props.center).addTo(mapObject).bindPopup(props.balloon_text);
-
-      setMapState(prevState => {
-        return {...prevState, mapObject: mapObject};
-      });
-    }
-    return () => {
-      if (mapState.mapObject) {
-        mapState.mapObject.remove();
-      }
-    }
-  }, [mapState.scrolled, props.center, props.zoom, props.balloon_text, mapState.mapObject])
+  useOnScrollToElement(mapRef, createMap, removeMap);
 
   return (
     <Box ref={mapRef} {...props}>

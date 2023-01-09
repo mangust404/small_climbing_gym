@@ -1,10 +1,11 @@
 import React, {Suspense} from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout'
 
 const SignIn = React.lazy(() => import('./pages/SignIn'));
 const PasswordReset = React.lazy(() => import('./pages/PasswordReset'));
 const SignUp = React.lazy(() => import('./pages/SignUp'));
+const SignOut = React.lazy(() => import('./pages/SignOut'));
 const Home = React.lazy(() => import('./pages/Home'));
 const Visit = React.lazy(() => import('./pages/Visit'));
 const Faq = React.lazy(() => import('./pages/Faq'));
@@ -19,6 +20,8 @@ export default function App() {
           <Route path="sign-in" element={<SignIn />} />
           <Route path="password-reset" element={<PasswordReset />} />
           <Route path="sign-up" element={<SignUp />} />
+          <Route path="sign-out" element={<SignOut />} />
+
           <Route path="visit" element={<Visit />} />
           <Route path="faq" element={<Faq />} />
           <Route path="terms" element={<Terms />} />

@@ -1,0 +1,6 @@
+- Sign up
+ - create account with with social networks will skip 2 steps
+- Sign in
+- Visit page
+ - visit as first-time participant
+ - as registered user for regular visiting
