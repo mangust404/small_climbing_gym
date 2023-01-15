@@ -1,11 +1,21 @@
 import React from 'react';
-import { Container, AppBar, Toolbar, Typography, Button, Link, Chip } from '@mui/material';
+import { renderToString } from 'react-dom/server'
+import { Container, AppBar, Toolbar, Typography, Button, Link, Chip, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import i18next from './i18n';
 import SvgLogo from './components/SvgLogo';
 import Footer from './components/Footer';
+import { Trans } from 'react-i18next'
 
-export default function Layout() {
+export default function Layout(props) {
+  const t = props.t;
+
+  function handleLangChange(e) {
+    props.setLang((prevLang) => {
+      return e.target.value;
+    });
+  }
+
   return (
     <>
       <AppBar
@@ -17,10 +27,10 @@ export default function Layout() {
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <SvgLogo sx={{width: 60, height: 60}} />
           <Typography variant="h6" color="primary.main" noWrap sx={{ flexGrow: 1 }}>
-            {i18next.t('header.company_name')}
+            {t('header.company_name')}
             <Chip
               variant="outlined"
-              label={i18next.t('header.sub_logo_button')}
+              label={t('header.sub_logo_button')}
               sx={{
                 display: {
                   xs: 'none',
@@ -32,6 +42,22 @@ export default function Layout() {
               }}
             />
           </Typography>
+          <FormControl sx={{  }} size="small">
+            <InputLabel id="lang-select-label"></InputLabel>
+            <Select
+              labelId="lang-select-label"
+              id="lang-select"
+              value={props.lang}
+              onChange={handleLangChange}
+              sx={{
+                py: 0
+              }}
+            >
+              <MenuItem value="en">🇺🇸</MenuItem>
+              <MenuItem value="ru-RU">🇷🇺</MenuItem>
+              <MenuItem value="kk-KZ">🇰🇿</MenuItem>
+            </Select>
+          </FormControl>
           <nav>
             <Link
               variant="button"
@@ -39,7 +65,7 @@ export default function Layout() {
               to="/"
               sx={{ my: 1, mx: 1.5, color: 'primary.main' }}
             >
-              {i18next.t('header.link_home')}
+              {t('header.link_home')}
             </Link>
             <Link
               variant="button"
@@ -47,12 +73,31 @@ export default function Layout() {
               to="/visit"
               sx={{ my: 1, mx: 1.5, color: 'primary.main' }}
             >
-              {i18next.t('header.link_visit')}
+              {t('header.link_visit')}
             </Link>
           </nav>
-          <Button to="sign-in" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
+          {
+            props.a14n.name ?
+              <FormControl sx={{  }} size="small">
+                <InputLabel id="user-select-label"></InputLabel>
+                <Select
+                  labelId="user-select-label"
+                  id="user-select"
+                  value="username"
+                  data-testid="user-logged-in"
+                  sx={{
+                    py: 0
+                  }}
+                >
+                  <MenuItem sx={{ display: 'none'}} value="username"><Trans t={t} i18nKey="header.welcome_back" values={{ username: props.a14n.name}} /></MenuItem>
+                  <MenuItem><Link to="/sign-out">{t('header.logout')}</Link></MenuItem>
+                </Select>
+              </FormControl>
+            : 
+              <Button to="sign-in" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                {t('header.login')}
+              </Button>
+          }
         </Toolbar>
       </AppBar>
       <Container maxWidth="lg" sx={{ pt: 8, pb: 6 }}>

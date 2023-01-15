@@ -1,8 +1,18 @@
 import * as React from 'react';
 import { Paper } from '@mui/material';
-//import i18next from '../i18n';
+import { Navigate } from 'react-router-dom';
 
-export default function SignOut() {
+export default function SignOut(props) {
+  const t = props.t;
+
+  props.setA14n(prevState => {
+    return {
+      token: '',
+      name: '',
+      remember: prevState.remember
+    }
+  })
+
   return (
     <Paper
       sx={{
@@ -10,7 +20,7 @@ export default function SignOut() {
         mb: 4
       }}
     >
-      Todo SignOut
+      {!props.a14n.token && !props.a14n.name && <Navigate to="/" />}
     </Paper>
   );
 }

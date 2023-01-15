@@ -24,7 +24,13 @@ glob("./api/**/*.js", function (er, files) {
     console.log('using', method, path);
     app[method](path, (req, res) => {
       console.log('[invoke ' + method + ' ' + path + ']', req.body);
-      return require(file)(req, res);
+      const callback = require(file);
+      if (callback && typeof(callback) == 'function') {
+        return callback(req, res);
+      }
+      else {
+        res.status(404).send({success: false});
+      }
     });
   })
 })

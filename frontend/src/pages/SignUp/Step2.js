@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { InputAdornment, TextField, Alert } from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import i18next from '../../i18n';
 
 export default function Step2 (props) {
+  const t = props.t;
   const setValues = (newValues) => {
     props.setFormState(prevState => {
       const newCollectedValues = {
@@ -15,11 +15,11 @@ export default function Step2 (props) {
       let message = '';
       if (newCollectedValues.password != newCollectedValues.password2) {
         isValid = false;
-        message = i18next.t('signup.password_mistmatch');
+        message = t('signup.password_mistmatch');
       }
       else if (!newCollectedValues.password || !newCollectedValues.password2 || !newCollectedValues.name) {
         isValid = false;
-        //message = i18next.t('signup.fill_password');
+        //message = t('signup.fill_password');
       }
       return {
         ...prevState,
@@ -56,7 +56,7 @@ export default function Step2 (props) {
         required
         fullWidth
         name="password"
-        label={i18next.t('Password')}
+        label={t('signup.password')}
         type="password"
         id="password"
         onChange={handleChange}
@@ -77,7 +77,7 @@ export default function Step2 (props) {
         required
         fullWidth
         name="password2"
-        label={i18next.t('Repeat password')}
+        label={t('signup.repeat_password')}
         type="password"
         id="password2"
         onChange={handleChange}
@@ -99,7 +99,7 @@ export default function Step2 (props) {
         required
         fullWidth
         id="name"
-        label={i18next.t('Name (visible to others)')}
+        label={t('signup.name')}
         name="name"
         onChange={handleChange}
         autoComplete="off"

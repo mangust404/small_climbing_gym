@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Typography, Popover, Slider } from '@mui/material';
-import { Trans, useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import HelpIcon from '@mui/icons-material/Help';
-import i18next from '../../i18n';
 
 const grades = [
   {value: 1, label: '5A'}, {value: 2, label: '5B'}, {value: 3, label: '5C'},
@@ -12,7 +11,9 @@ const grades = [
 ];
 
 export default function Step4 (props) {
-  const [grade, setGrade] = React.useState(props.formState.collectedValues.grade? props.formState.collectedValues.grade: [1, 4]);
+  const t = props.t;
+
+  const [grade, setGrade] = React.useState(props.formState.collectedValues.grade);
   const handleGradeChange = (event, newValue) => {
     setGrade(newValue);
   };
@@ -29,8 +30,6 @@ export default function Step4 (props) {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     props.setFormState(prevState => {
@@ -49,7 +48,7 @@ export default function Step4 (props) {
   return (
     <>
       <Typography sx={{display: 'flex', mt: 2, mb: 1}}>
-        {i18next.t('Preferred climbing grade')}
+        {t('signup.climbing_grade')}
         <HelpIcon
           aria-describedby={id}
           onClick={handleClick}
@@ -67,7 +66,7 @@ export default function Step4 (props) {
         }}
       >
         <Typography sx={{ p: 2, whiteSpace: 'pre' }}>
-          <Trans t={t}>
+          <Trans t={t} i18nKey="signup.grades_content">
             Right value - is your <b>max</b> grade on which you're<br />
             progressing right now.<br /><br />
             The lower value - is the grade on which you usually<br />
@@ -91,7 +90,7 @@ export default function Step4 (props) {
         data-testid="slider"
       />
       <Typography variant="caption" display="block" gutterBottom color="muted">
-        {i18next.t('leave it as default 5A-6A if you don\'t understand the grade system yet')}
+        {t('signup.climbing_footer')}
       </Typography>
     </>
   );

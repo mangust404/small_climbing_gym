@@ -1,25 +1,28 @@
 import React, { Suspense, useEffect } from 'react';
-import { redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Container, Typography, Stepper, Step, StepLabel, Box, Grid, Alert, Button, CircularProgress } from '@mui/material';
-import i18next from '../i18n';
 import callApiFetch from '../helpers/callApiFetch';
-
-const steps = [
-  'signup.steps.0',
-  'signup.steps.1',
-  'signup.steps.2',
-  'signup.steps.3',
-  'signup.steps.4'].map(i18next.t);
 
 const StepsComponents = {
   'Step0': React.lazy(() => import('./SignUp/Step0')),
   'Step1': React.lazy(() => import('./SignUp/Step1')),
   'Step2': React.lazy(() => import('./SignUp/Step2')),
   'Step3': React.lazy(() => import('./SignUp/Step3')),
-  'Step4': React.lazy(() => import('./SignUp/Step4'))
+  'Step4': React.lazy(() => import('./SignUp/Step4')),
+  'Step5': React.lazy(() => import('./SignUp/Step5'))
 };
 
-export default function SignUp() {
+export default function SignUp(props) {
+  const i18next = props.i18next;
+  const t = props.t;
+
+  const steps = [
+    'signup.steps.0',
+    'signup.steps.1',
+    'signup.steps.2',
+    'signup.steps.3',
+    'signup.steps.4'].map(t);
+
   const [formState, setFormState] = React.useState({
                                       activeStep: 0,
                                       inProgress: false,
@@ -29,7 +32,12 @@ export default function SignUp() {
                                       skipped: new Set(),
                                       collectedValues: {
                                         lang: i18next.language,
-                                        email: ''
+                                        email: '',
+                                        password: '',
+                                        password2: '',
+                                        name: '',
+                                        phone: '',
+                                        grade: [1, 4]
                                       }
                                     });
 
@@ -129,7 +137,7 @@ export default function SignUp() {
                       ...prevFormState,
                       showError: true,
                       inProgress: false,
-                      currentStepError: <Alert severity="error">{i18next.t('signup.wrong_code')}</Alert>
+                      currentStepError: <Alert severity="error">{t('signup.wrong_code')}</Alert>
                     }
                   });
                 }
@@ -147,7 +155,9 @@ export default function SignUp() {
             .then(
               (result) => {
                 if (result.success) {
-                  redirect('/sign-in');
+                  setFormState((prevFormState) => {
+                    return constNextStep(prevFormState);
+                  });
                 }
                 else {
                   setFormState((prevFormState) => {
@@ -155,7 +165,7 @@ export default function SignUp() {
                       ...prevFormState,
                       showError: true,
                       inProgress: false,
-                      currentStepError: <Alert severity="error">{i18next.t(result.error)}</Alert>
+                      currentStepError: <Alert severity="error">{t(result.error)}</Alert>
                     }
                   });
                 }
@@ -187,7 +197,7 @@ export default function SignUp() {
     if (!isStepOptional(formState.activeStep)) {
       // You probably want to guard against something like this,
       // it should never occur unless someone's actively trying to break something.
-      throw new Error(i18next.t('You can\'t skip a step that isn\'t optional.'));
+      throw new Error(t('You can\'t skip a step that isn\'t optional.'));
     }
 
     setFormState(prevFormState => {
@@ -206,8 +216,9 @@ export default function SignUp() {
 
   return (
     <Container component="main">
+      {props.a14n && props.a14n.name && props.a14n.token && <Navigate to="/" />}
       <Typography component="h1" variant="h5" sx={{textAlign: 'center'}}>
-        {i18next.t('signup.title')}
+        {t('signup.title')}
       </Typography>
 
       <Stepper activeStep={formState.activeStep} sx={{marginTop: 2}}>
@@ -216,7 +227,7 @@ export default function SignUp() {
           const labelProps = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
+              <Typography variant="caption">{t('signup.optional')}</Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -241,41 +252,43 @@ export default function SignUp() {
         >
           <Box component="form" noValidate sx={{ mt: 1 }} autoComplete="off">
             <Grid container>
-              <Suspense fallback={<div>{i18next.t('signup.please_wait')}</div>}>
-                <CurrentStep formState={formState} setFormState={setFormState} />
+              <Suspense fallback={<div>{t('signup.please_wait')}</div>}>
+                <CurrentStep formState={formState} setFormState={setFormState} i18next={props.i18next} t={props.t} />
               </Suspense>
 
               <Box sx={{mt: 2}}>
                 {formState.showError && formState.currentStepError ? formState.currentStepError : ''}
-                {formState.showError && <Alert severity="error">{i18next.t('signup.fill_all_to_proceed')}</Alert>}
+                {formState.showError && <Alert severity="error">{t('signup.fill_all_to_proceed')}</Alert>}
               </Box>
 
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>
-                <Button
-                  color="inherit"
-                  disabled={formState.activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
-                  {i18next.t('signup.back')}
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                {isStepOptional(formState.activeStep) && (
-                  <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                    {i18next.t('signup.skip')}
+              {formState.activeStep < 5 && 
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '100%' }}>
+                  <Button
+                    color="inherit"
+                    disabled={formState.activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
+                  >
+                    {t('signup.back')}
                   </Button>
-                )}
-
-                {
-                  formState.inProgress ?
-                    <CircularProgress data-testid="spinner" />
-                    :
-                    <Button onClick={handleNext} data-testid="submit-button">
-                      {formState.activeStep === steps.length - 1 ? i18next.t('signup.finish') : i18next.t('signup.next')}
+                  <Box sx={{ flex: '1 1 auto' }} />
+                  {isStepOptional(formState.activeStep) && (
+                    <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                      {t('signup.skip')}
                     </Button>
-                }
-                
-              </Box>
+                  )}
+
+                  {
+                    formState.inProgress ?
+                      <CircularProgress data-testid="spinner" />
+                      :
+                      <Button onClick={handleNext} data-testid="submit-button">
+                        {formState.activeStep === steps.length - 1 ? t('signup.finish') : t('signup.next')}
+                      </Button>
+                  }
+                  
+                </Box>
+              }
             </Grid>
           </Box>
         </Box>

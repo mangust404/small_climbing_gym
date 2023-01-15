@@ -3,7 +3,11 @@
     "company_name": "Kilter club Almaty",
     "sub_logo_button": "climbing gym",
     "link_home": "Home",
-    "link_visit": "Visit"
+    "link_visit": "Visit",
+    "language": "Language",
+    "login": "Login",
+    "welcome_back": "Welcome back, {{username}}!",
+    "logout": "Logout"
   },
   "home": {
     "variant": "Variant",
@@ -37,6 +41,8 @@
 
     "why_climbing_header": "Why climbing?",
     "what_is_kilter_header": "What is Kilterboard?",
+    "what_is_text1": "The Kilter Board was designed to suit the needs of a users of all abilities so gyms will be able to use the board for their entire customer base.",
+    "what_is_text2": "Everyone, regardless of level, can enjoy the intuitive lights to climb, set, and interact with other climbers around the world!",
     "our_setup_header": "Our setup",
     "map_contacts_header": "Map / Contacts",
     "our_address": "Our address",
@@ -64,6 +70,7 @@
   "signup": {
     "steps": ["Email", "Confirm email", "Password & name", "Phone", "Finish"],
     "title": "Create new account",
+    "optional": "Optional",
     "please_wait": "Please wait...",
     "fill_all_to_proceed": "Please fill all the fields above to proceed",
     "next": "Next",
@@ -71,7 +78,18 @@
     "back": "Back",
     "skip": "Skip",
     "email_label": "Email Address",
+    "email_not_valid": "Email is not valid",
+    "confirmation_code": "Confirmation code",
+    "code_not_valid": "Code is not valid",
+    "code_sent": "We sent you confirmation code. Check your mail.",
     "wrong_code": "Wrong confirmation code. Probably it's already outdated. Please return back and send another confirmation email.",
-    "password_mistmatch": "Passwords should match"
+    "password": "Password",
+    "repeat_password": "Repeat password",
+    "name": "Name (visible to others)",
+    "password_mistmatch": "Passwords should match",
+    "climbing_grade": "Preferred climbing grade",
+    "climbing_footer": "leave it as default 5A-6A if you don't understand the grade system yet",
+    "registration_complete": "Registration complete. You may sign in with specified email and password.",
+    "signin": "Sign in"
   }
 }

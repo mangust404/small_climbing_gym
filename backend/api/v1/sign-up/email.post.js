@@ -38,7 +38,7 @@ module.exports = async function signUpEmail(req, res) {
       result.id = insertResult.insertedId;
     }
 
-    const nodemailer = require("nodemailer");
+    const nodemailer = require(req.headers.node_env == 'test'? 'nodemailer-mock': 'nodemailer');
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_SMTP_HOST,
       port: process.env.MAIL_SMTP_PORT,

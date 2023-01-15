@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { InputAdornment, TextField } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input'
 
-import i18next from '../../i18n';
-
 export default function Step3 (props) {
+  const i18next = props.i18next;
   const [phone, setPhone] = React.useState(props.formState.collectedValues.phone? props.formState.collectedValues.phone: '+77')
 
   const handlePhoneChange = (newPhone) => {

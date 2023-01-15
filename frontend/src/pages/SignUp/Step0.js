@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { InputAdornment, TextField, Alert } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
-import i18next from '../../i18n';
 
 export default function Step0 (props) {
+  const t = props.t;
   // eslint-disable-next-line
   const emailIsValid = (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
@@ -12,7 +12,7 @@ export default function Step0 (props) {
       return {
         ...prevState,
         currentStepIsValid: emailIsValid(email),
-        currentStepError: <Alert severity="warning">{i18next.t('Email is not valid')}</Alert>,
+        currentStepError: <Alert severity="warning">{t('signup.email_not_valid')}</Alert>,
         collectedValues: {
           ...prevState.collectedValues,
           email
@@ -46,7 +46,7 @@ export default function Step0 (props) {
         required
         fullWidth
         id="email"
-        label={i18next.t('signup.email_label')}
+        label={t('signup.email_label')}
         onChange={handleChange}
         disabled={props.formState.inProgress}
         value={props.formState.collectedValues.email}

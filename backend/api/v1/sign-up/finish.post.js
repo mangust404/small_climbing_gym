@@ -24,6 +24,7 @@ module.exports = async function finish(req, res) {
           name: result.name,
           phone: result.phone,
           grade: result.grade,
+          verified: true,
           createdAt: new Date()
         },
         $unset: { confirmation_code: '' }

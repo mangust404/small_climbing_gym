@@ -5,17 +5,16 @@ import { act } from 'react-dom/test-utils';
 import SignUp from '../../pages/SignUp';
 import callApiFetch from '../../helpers/callApiFetch';
 import querystring from 'querystring';
+import i18next from '../../i18n';
 
 let container;
 
 beforeAll(() => {
-  callApiFetch('test/cleanup');
   container = document.createElement('div');
   document.body.appendChild(container);
 });
 
 afterAll(() => {
-  callApiFetch('test/cleanup');
   document.body.removeChild(container);
   container = null;
 });
@@ -24,7 +23,7 @@ afterAll(() => {
 it('works', async () => {
 
   act(() => {
-    ReactDOM.createRoot(container).render(<SignUp />);
+    ReactDOM.createRoot(container).render(<SignUp t={i18next.t} i18next={i18next} />);
   });
 
   const input = await waitFor(() => screen.getByTestId('email'))

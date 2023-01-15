@@ -1,5 +1,5 @@
 
-export default function callApiFetch($api_call, post_data) {
+export default async function callApiFetch($api_call, post_data) {
   return fetch(process.env.REACT_APP_BACKEND_URL + $api_call, {
     method: post_data? 'POST': 'GET',
     mode: 'cors',

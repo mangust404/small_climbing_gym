@@ -15,9 +15,11 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "glob": "^8.0.3",
+    "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
     "nodemailer": "^6.8.0",
     "nodemailer-express-handlebars": "^6.0.0",
+    "nodemailer-mock": "^1.5.12",
     "password-hash": "^1.2.2"
   }
 }
