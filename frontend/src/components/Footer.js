@@ -1,8 +1,14 @@
 import React from 'react';
-import { Container, Link, Typography } from '@mui/material';
+import { Container, Link, Typography, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import i18next from '../i18n';
 
 export default function Footer(props) {
+  function handleLangChange(e) {
+    props.setLang((prevLang) => {
+      return e.target.value;
+    });
+  }
+
   return (
     <>
       <Container sx={{py: 4, justifyContent: 'center', alignItems: 'baseline', display: 'flex'}}>
@@ -40,6 +46,24 @@ export default function Footer(props) {
         </Link>
 
         <Typography sx={{ml: 4}}>© Kilter club Almaty {(new Date()).getFullYear()}</Typography>
+
+        <FormControl sx={{ ml: 2 }} size="small">
+          <InputLabel id="lang-select-label"></InputLabel>
+          <Select
+            labelId="lang-select-label"
+            id="lang-select"
+            value={props.lang}
+            onChange={handleLangChange}
+            sx={{
+              py: 0
+            }}
+          >
+            <MenuItem value="en">🇺🇸</MenuItem>
+            <MenuItem value="ru-RU">🇷🇺</MenuItem>
+            <MenuItem value="kk-KZ">🇰🇿</MenuItem>
+          </Select>
+        </FormControl>
+
       </Container>
     </>
   );

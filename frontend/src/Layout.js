@@ -10,11 +10,6 @@ import { Trans } from 'react-i18next'
 export default function Layout(props) {
   const t = props.t;
 
-  function handleLangChange(e) {
-    props.setLang((prevLang) => {
-      return e.target.value;
-    });
-  }
 
   return (
     <>
@@ -42,22 +37,6 @@ export default function Layout(props) {
               }}
             />
           </Typography>
-          <FormControl sx={{  }} size="small">
-            <InputLabel id="lang-select-label"></InputLabel>
-            <Select
-              labelId="lang-select-label"
-              id="lang-select"
-              value={props.lang}
-              onChange={handleLangChange}
-              sx={{
-                py: 0
-              }}
-            >
-              <MenuItem value="en">🇺🇸</MenuItem>
-              <MenuItem value="ru-RU">🇷🇺</MenuItem>
-              <MenuItem value="kk-KZ">🇰🇿</MenuItem>
-            </Select>
-          </FormControl>
           <nav>
             <Link
               variant="button"
@@ -104,7 +83,7 @@ export default function Layout(props) {
         <Outlet />
       </Container>
 
-      <Footer />
+      <Footer setLang={props.setLang} lang={props.lang} />
     </>
   );
 }
