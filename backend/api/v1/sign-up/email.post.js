@@ -5,7 +5,7 @@ const express = require('express');
 
 module.exports = async function signUpEmail(req, res) {
   const result = req.body;
-  const confirmation_code = parseInt(10000+Math.random()*89999);;
+  const confirmation_code = parseInt(10000+Math.random()*89999);
 
   const client = new MongoClient(req.headers.node_env == 'test'? process.env.MONGODB_URI_TEST: process.env.MONGODB_URI);
   try {

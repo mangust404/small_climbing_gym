@@ -91,5 +91,12 @@
     "climbing_footer": "leave it as default 5A-6A if you don't understand the grade system yet",
     "registration_complete": "Registration complete. You may sign in with specified email and password.",
     "signin": "Sign in"
+  },
+
+  "password_reset": {
+    "title": "Reset password",
+    "password": "New password",
+    "code_sent": "Please check your email. You will receive confirmation code if such email was registered.",
+    "complete": "Password was successfully changed. You may login now."
   }
 }

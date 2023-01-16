@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { render, screen, waitFor, fireEvent, createEvent, waitForElementToBeRemoved} from '@testing-library/react';
+import { render, screen, waitFor, fireEvent, createEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
-import SignUp from '../../pages/SignUp';
+import PasswordReset from '../../pages/PasswordReset';
 import callApiFetch from '../../helpers/callApiFetch';
 import querystring from 'querystring';
 import i18next from '../../i18n';
 
-let container;
+let container, user;
+const testEmail = 'test_password_reset@test.com';
 
-beforeAll(() => {
+beforeAll(async () => {
   container = document.createElement('div');
   document.body.appendChild(container);
+
+  const password = 'testtest';
+  let data = await callApiFetch('test/create_user', {email: testEmail, password: 'testtest'});
+
+  user = data.user;
+  user.password_raw = password;
 });
 
 afterAll(() => {
@@ -22,14 +29,13 @@ afterAll(() => {
 
 it('works', async () => {
   i18next.changeLanguage('cimode');
-
   act(() => {
-    ReactDOM.createRoot(container).render(<SignUp t={i18next.t} i18next={i18next} />);
+    ReactDOM.createRoot(container).render(<PasswordReset t={i18next.t} />);
   });
 
   const input = await waitFor(() => screen.getByTestId('email'))
   
-  fireEvent.change(input.querySelector('input'), {target: {value: 'test@test.com'}})
+  fireEvent.change(input.querySelector('input'), {target: {value: testEmail}})
 
   let nextButton = screen.getByText('signup.next')
 
@@ -37,7 +43,7 @@ it('works', async () => {
 
   let confirmation_input = await waitFor(() => screen.getByTestId('confirmation-code'), {timeout: 3000})
 
-  const { code } = await callApiFetch('test/confirmation_code', {email: 'test@test.com'});
+  const { code } = await callApiFetch('test/confirmation_code', {email: testEmail});
 
   fireEvent.change(confirmation_input.querySelector('input'), {target: {value: parseInt(code) + 1}});
 
@@ -57,27 +63,17 @@ it('works', async () => {
   fireEvent.click(nextButton);
 
   await waitFor(() => screen.getByTestId('password1'), {timeout: 3000})
-  fireEvent.change(screen.getByTestId('password1').querySelector('input'), {target: {value: 'a'.repeat(6)}});
-  fireEvent.change(screen.getByTestId('password2').querySelector('input'), {target: {value: 'a'.repeat(6)}});
-  fireEvent.change(screen.getByTestId('name').querySelector('input'), {target: {value: 'test user'}});
-
-  nextButton = screen.getByText('signup.next')
-  fireEvent.click(nextButton);
-  
-  await waitFor(() => screen.getByTestId('phone'))
-  fireEvent.change(screen.getByTestId('phone').querySelector('input'), {target: {value: '+7 777 123 4567'}});
+  const newPassword = 'a'.repeat(6);
+  fireEvent.change(screen.getByTestId('password1').querySelector('input'), {target: {value: newPassword}});
+  fireEvent.change(screen.getByTestId('password2').querySelector('input'), {target: {value: newPassword}});
 
   nextButton = screen.getByText('signup.next')
   fireEvent.click(nextButton);
 
-  await waitFor(() => screen.getByTestId('slider'))
+  await waitFor(() => screen.getByText('signup.signin'), {timeout: 3000})
 
-  //screen.debug(null, 300000);
+  const signIn = await callApiFetch('user/sign-in', {email: testEmail, password: newPassword, remember: false});
 
-  nextButton = screen.getByTestId('submit-button')
-  fireEvent.click(nextButton);
-
-
-  /*const linkElement = screen.getByText(/Book my training now/i);
-  expect(linkElement).toBeInTheDocument();*/
+  expect(signIn.success).toBe(true);
+  expect(signIn.token).not.toBe('');
 });
