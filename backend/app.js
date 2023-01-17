@@ -7,6 +7,7 @@ const app = express();
 const HOST = process.env.BACKEND_HOST || '0.0.0.0';
 const PORT = process.env.BACKEND_PORT || 3000;
 
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +24,9 @@ glob("./api/**/*.js", function (er, files) {
 
     console.log('using', method, path);
     app[method](path, (req, res) => {
-      console.log('[invoke ' + method + ' ' + path + ']', req.body);
+      if ('production' != process.env.NODE_ENV) {
+        console.log('[invoke ' + method + ' ' + path + ']', req.body);
+      }
       const callback = require(file);
       if (callback && typeof(callback) == 'function') {
         return callback(req, res);

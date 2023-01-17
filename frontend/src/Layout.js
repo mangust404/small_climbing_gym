@@ -20,23 +20,25 @@ export default function Layout(props) {
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
-          <SvgLogo sx={{width: 60, height: 60}} />
-          <Typography variant="h6" color="primary.main" noWrap sx={{ flexGrow: 1 }}>
-            {t('header.company_name')}
-            <Chip
-              variant="outlined"
-              label={t('header.sub_logo_button')}
-              sx={{
-                display: {
-                  xs: 'none',
-                  sm: 'none',
-                  md: 'inline-flex'
-                },
-                ml: 2,
-                color: 'warning.main'
-              }}
-            />
-          </Typography>
+          <Link to="/" sx={{ flexGrow: 1, textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            <SvgLogo sx={{width: 60, height: 60}} />
+            <Typography variant="h6" color="primary.main" noWrap sx={{ display: 'inline-block' }}>
+              {t('header.company_name')}
+              <Chip
+                variant="outlined"
+                label={t('header.sub_logo_button')}
+                sx={{
+                  display: {
+                    xs: 'none',
+                    sm: 'none',
+                    md: 'inline-flex'
+                  },
+                  ml: 2,
+                  color: 'warning.main'
+                }}
+              />
+            </Typography>
+          </Link>
           <nav>
             <Link
               variant="button"

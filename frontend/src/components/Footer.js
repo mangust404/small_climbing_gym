@@ -15,14 +15,6 @@ export default function Footer(props) {
         <Link
           variant="button"
           color="success.main"
-          to="/"
-          sx={{ my: 1, mx: 1.5 }}
-        >
-          {i18next.t('footer.home')}
-        </Link>
-        <Link
-          variant="button"
-          color="success.main"
           to="/visit"
           sx={{ my: 1, mx: 1.5 }}
         >
